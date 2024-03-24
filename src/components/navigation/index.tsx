@@ -17,7 +17,7 @@ const Navigation = ({ user }: Props) => {
           src={"./assets/plura-logo.svg"}
           width={40}
           height={40}
-          alt="plur logo"
+          alt="wbuilder logo"
         />
         <span className="text-xl font-bold"> WBuilder.</span>
       </aside>
