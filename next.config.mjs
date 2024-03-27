@@ -7,6 +7,7 @@ const nextConfig = {
       { hostname: "subdomain" },
       { hostname: "uploadthing.com" },
       { hostname: "files.stripe.com" },
+      { hostname: "utfs.io" },
     ],
   },
   reactStrictMode: false,
