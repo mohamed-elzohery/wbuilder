@@ -1,4 +1,5 @@
 import { getAuthUserDetails, verifyAndAcceptInvitation } from "@/lib/queries";
+import { currentUser } from "@clerk/nextjs";
 import { Plan } from "@prisma/client";
 import { redirect } from "next/navigation";
 import React from "react";
@@ -34,7 +35,15 @@ const AgencyPage = async ({
       return <div>Not authorized</div>;
     }
   }
-  return <div>AgencyPage</div>;
+  const authUser = await currentUser();
+
+  return (
+    <div className="flex justify-center items-center mt-4">
+      <div className="max-w-[850px] border border-1 p-4 rounded-xl">
+        <h1 className="text-4xl">Create Agency</h1>
+      </div>
+    </div>
+  );
 };
 
 export default AgencyPage;
