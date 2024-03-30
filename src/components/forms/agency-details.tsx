@@ -121,20 +121,20 @@ const AgencyDetails = ({ data }: Props) => {
           },
         };
 
-        const customerResponse = await fetch("/api/stripe/create-customer", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(bodyData),
-        });
-        const customerData: { customerId: string } =
-          await customerResponse.json();
-        custId = customerData.customerId;
+        // const customerResponse = await fetch("/api/stripe/create-customer", {
+        //   method: "POST",
+        //   headers: {
+        //     "Content-Type": "application/json",
+        //   },
+        //   body: JSON.stringify(bodyData),
+        // });
+        // const customerData: { customerId: string } =
+        //   await customerResponse.json();
+        // custId = customerData.customerId;
       }
 
       newUserData = await initUser({ role: "AGENCY_OWNER" });
-      if (!data?.customerId && !custId) return;
+      // if (!data?.customerId && !custId) return;
 
       const response = await upsertAgency({
         id: data?.id ? data.id : v4(),
@@ -194,7 +194,7 @@ const AgencyDetails = ({ data }: Props) => {
 
   return (
     <AlertDialog>
-      <Card className="w-full">
+      <Card className="w-full mt-4">
         <CardHeader>
           <CardTitle>Agency Information</CardTitle>
           <CardDescription>
