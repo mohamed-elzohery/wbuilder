@@ -26,6 +26,7 @@ import Link from "next/link";
 import { twMerge } from "tailwind-merge";
 import { useModal } from "@/providers/ModalProvider";
 import CustomModal from "../global/CustomModal";
+import SubAccountDetails from "../forms/subaccount-details";
 import { Separator } from "../ui/separator";
 import { icons } from "@/lib/constants";
 
@@ -232,7 +233,11 @@ const MenuOptions = ({
                             title="Create A Subaccount"
                             subheading="You can switch between your agency account and the subaccount from the sidebar"
                           >
-                            <form>To Be Written</form>
+                            <SubAccountDetails
+                              agencyDetails={user?.Agency as Agency}
+                              userId={user?.id as string}
+                              userName={user?.name}
+                            />
                           </CustomModal>
                         );
                       }}
@@ -262,13 +267,10 @@ const MenuOptions = ({
                       val = <result.path />;
                     }
                     return (
-                      <CommandItem
-                        key={sidebarOptions.id}
-                        className="md:w-[320px] w-full"
-                      >
+                      <CommandItem key={sidebarOptions.id} className=" w-full">
                         <Link
                           href={sidebarOptions.link}
-                          className="flex items-center gap-2 hover:bg-transparent rounded-md transition-all md:w-full w-[320px]"
+                          className="flex items-center gap-2 hover:bg-transparent rounded-md transition-all md:w-full "
                         >
                           {val}
                           <span>{sidebarOptions.name}</span>
