@@ -51,11 +51,7 @@ const MenuOptions = ({
 }: Props) => {
   const { setOpen } = useModal();
   const [isMounted, setIsMounted] = useState(false);
-
-  const openState = useMemo(
-    () => (defaultOpen ? { open: true } : {}),
-    [defaultOpen]
-  );
+  const [openState, setOpenState] = useState(defaultOpen);
 
   useEffect(() => {
     setIsMounted(true);
@@ -64,18 +60,18 @@ const MenuOptions = ({
   if (!isMounted) return;
 
   return (
-    <Sheet modal={false} {...openState}>
-      <SheetTrigger
-        asChild
-        className="absolute left-4 top-4 z-[100] md:!hidden felx"
-      >
+    <Sheet
+      modal={false}
+      open={openState}
+      onOpenChange={() => setOpenState((prev) => !prev)}
+    >
+      <SheetTrigger asChild className="absolute left-4 top-4 z-[100] felx">
         <Button variant="outline" size={"icon"}>
           <Menu />
         </Button>
       </SheetTrigger>
 
       <SheetContent
-        showX={!defaultOpen}
         side={"left"}
         className={clsx(
           "bg-background/80 backdrop-blur-xl fixed top-0 border-r-[1px] p-6",
