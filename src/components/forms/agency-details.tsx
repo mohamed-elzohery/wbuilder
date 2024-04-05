@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import React, { useEffect, useState } from "react";
 import { NumberInput } from "@tremor/react";
 import { v4 } from "uuid";
+
 import { useRouter } from "next/navigation";
 import {
   AlertDialog,
@@ -121,20 +122,20 @@ const AgencyDetails = ({ data }: Props) => {
           },
         };
 
-        // const customerResponse = await fetch("/api/stripe/create-customer", {
-        //   method: "POST",
-        //   headers: {
-        //     "Content-Type": "application/json",
-        //   },
-        //   body: JSON.stringify(bodyData),
-        // });
-        // const customerData: { customerId: string } =
-        //   await customerResponse.json();
-        // custId = customerData.customerId;
+        const customerResponse = await fetch("/api/stripe/create-customer", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(bodyData),
+        });
+        const customerData: { customerId: string } =
+          await customerResponse.json();
+        custId = customerData.customerId;
       }
 
       newUserData = await initUser({ role: "AGENCY_OWNER" });
-      // if (!data?.customerId && !custId) return;
+      if (!data?.customerId && !custId) return;
 
       const response = await upsertAgency({
         id: data?.id ? data.id : v4(),
@@ -194,7 +195,7 @@ const AgencyDetails = ({ data }: Props) => {
 
   return (
     <AlertDialog>
-      <Card className="w-full mt-4">
+      <Card className="w-full">
         <CardHeader>
           <CardTitle>Agency Information</CardTitle>
           <CardDescription>

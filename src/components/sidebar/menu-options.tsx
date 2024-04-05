@@ -51,7 +51,11 @@ const MenuOptions = ({
 }: Props) => {
   const { setOpen } = useModal();
   const [isMounted, setIsMounted] = useState(false);
-  const [openState, setOpenState] = useState(defaultOpen);
+
+  const openState = useMemo(
+    () => (defaultOpen ? { open: true } : {}),
+    [defaultOpen]
+  );
 
   useEffect(() => {
     setIsMounted(true);
@@ -60,12 +64,11 @@ const MenuOptions = ({
   if (!isMounted) return;
 
   return (
-    <Sheet
-      modal={false}
-      open={openState}
-      onOpenChange={() => setOpenState((prev) => !prev)}
-    >
-      <SheetTrigger asChild className="absolute left-4 top-4 z-[100] felx">
+    <Sheet modal={false} {...openState}>
+      <SheetTrigger
+        asChild
+        className="absolute left-4 top-4 z-[100] md:!hidden felx"
+      >
         <Button variant="outline" size={"icon"}>
           <Menu />
         </Button>
@@ -263,10 +266,10 @@ const MenuOptions = ({
                       val = <result.path />;
                     }
                     return (
-                      <CommandItem key={sidebarOptions.id} className=" w-full">
+                      <CommandItem key={sidebarOptions.id} className="w-full">
                         <Link
                           href={sidebarOptions.link}
-                          className="flex items-center gap-2 hover:bg-transparent rounded-md transition-all md:w-full "
+                          className="flex items-center gap-2 hover:bg-transparent rounded-md transition-all md:w-full"
                         >
                           {val}
                           <span>{sidebarOptions.name}</span>
