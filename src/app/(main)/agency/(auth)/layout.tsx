@@ -10,11 +10,7 @@ interface LayoutProps extends HasChildren {}
 
 const layout: React.FC<LayoutProps> = ({ children }) => {
   return (
-    <ClerkProvider appearance={{ baseTheme: dark }}>
-      <main className="h-full grid justify-center items-center">
-        {children}
-      </main>
-    </ClerkProvider>
+    <main className="h-full grid justify-center items-center">{children}</main>
   );
 };
 

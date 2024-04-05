@@ -11,6 +11,7 @@ import {
 
 import { db } from "./db";
 import { z } from "zod";
+import { getAuthUserDetails, getUserPermissions } from "./queries";
 
 export type NotificationWithUser =
   | ({
@@ -112,3 +113,8 @@ export type StripeCustomerType = {
 };
 
 export type UpsertFunnelPage = Prisma.FunnelPageCreateWithoutFunnelInput;
+export type AuthUserWithAgencySigebarOptionsSubAccounts =
+  Prisma.PromiseReturnType<typeof getAuthUserDetails>;
+export type UserWithPermissionsAndSubAccounts = Prisma.PromiseReturnType<
+  typeof getUserPermissions
+>;
