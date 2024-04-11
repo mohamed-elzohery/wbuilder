@@ -129,7 +129,7 @@ const SubaccountPageId = async ({ params, searchParams }: Props) => {
   return (
     <BlurPage>
       <div className="relative h-full">
-        {!subaccountDetails.connectAccountId && (
+        {false && (
           <div className="absolute -top-10 -left-10 right-0 bottom-0 z-30 flex items-center justify-center backdrop-blur-md bg-background/50">
             <Card>
               <CardHeader>
@@ -138,7 +138,7 @@ const SubaccountPageId = async ({ params, searchParams }: Props) => {
                   You need to connect your stripe account to see metrics
                 </CardDescription>
                 <Link
-                  href={`/subaccount/${subaccountDetails.id}/launchpad`}
+                  href={`/subaccount/ssdsds/launchpad`}
                   className="p-2 w-fit bg-secondary text-white rounded-md flex items-center gap-2"
                 >
                   <ClipboardIcon />
