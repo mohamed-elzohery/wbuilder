@@ -8,10 +8,19 @@ import {
   Ticket,
   User,
 } from "@prisma/client";
-
+import {
+  _getTicketsWithAllRelations,
+  getAuthUserDetails,
+  getFunnels,
+  getMedia,
+  getPipelineDetails,
+  getTicketsWithTags,
+  getUserPermissions,
+} from "./queries";
 import { db } from "./db";
 import { z } from "zod";
-import { getAuthUserDetails, getUserPermissions } from "./queries";
+
+// import Stripe from 'stripe'
 
 export type NotificationWithUser =
   | ({
@@ -27,6 +36,10 @@ export type NotificationWithUser =
       };
     } & Notification)[]
   | undefined;
+
+export type UserWithPermissionsAndSubAccounts = Prisma.PromiseReturnType<
+  typeof getUserPermissions
+>;
 
 export const FunnelPageSchema = z.object({
   name: z.string().min(1),
@@ -45,10 +58,15 @@ const __getUsersWithAgencySubAccountPermissionsSidebarOptions = async (
   });
 };
 
+export type AuthUserWithAgencySigebarOptionsSubAccounts =
+  Prisma.PromiseReturnType<typeof getAuthUserDetails>;
+
 export type UsersWithAgencySubAccountPermissionsSidebarOptions =
   Prisma.PromiseReturnType<
     typeof __getUsersWithAgencySubAccountPermissionsSidebarOptions
   >;
+
+export type GetMediaFiles = Prisma.PromiseReturnType<typeof getMedia>;
 
 export type CreateMediaType = Prisma.MediaCreateWithoutSubaccountInput;
 
@@ -73,9 +91,17 @@ export const CreateFunnelFormSchema = z.object({
   favicon: z.string().optional(),
 });
 
+export type PipelineDetailsWithLanesCardsTagsTickets = Prisma.PromiseReturnType<
+  typeof getPipelineDetails
+>;
+
 export const LaneFormSchema = z.object({
   name: z.string().min(1),
 });
+
+export type TicketWithTags = Prisma.PromiseReturnType<
+  typeof getTicketsWithTags
+>;
 
 const currencyNumberRegex = /^\d+(\.\d{1,2})?$/;
 
@@ -86,6 +112,10 @@ export const TicketFormSchema = z.object({
     message: "Value must be a valid price.",
   }),
 });
+
+export type TicketDetails = Prisma.PromiseReturnType<
+  typeof _getTicketsWithAllRelations
+>;
 
 export const ContactUserFormSchema = z.object({
   name: z.string().min(1, "Required"),
@@ -112,9 +142,10 @@ export type StripeCustomerType = {
   address: Address;
 };
 
+// export type PricesList = Stripe.ApiList<Stripe.Price>;
+
+export type FunnelsForSubAccount = Prisma.PromiseReturnType<
+  typeof getFunnels
+>[0];
+
 export type UpsertFunnelPage = Prisma.FunnelPageCreateWithoutFunnelInput;
-export type AuthUserWithAgencySigebarOptionsSubAccounts =
-  Prisma.PromiseReturnType<typeof getAuthUserDetails>;
-export type UserWithPermissionsAndSubAccounts = Prisma.PromiseReturnType<
-  typeof getUserPermissions
->;
