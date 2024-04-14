@@ -1,13 +1,13 @@
 "use client";
 import LaneForm from "@/components/forms/lane-form";
-import CustomModal from "@/components/global/custom-modal";
+import CustomModal from "@/components/global/CustomModal";
 import { Button } from "@/components/ui/button";
 import {
   LaneDetail,
   PipelineDetailsWithLanesCardsTagsTickets,
   TicketAndTags,
 } from "@/lib/types";
-import { useModal } from "@/providers/modal-provider";
+import { useModal } from "@/providers/ModalProvider";
 import { Lane, Ticket } from "@prisma/client";
 import { Flag, Plus } from "lucide-react";
 import { useRouter } from "next/navigation";
@@ -158,6 +158,7 @@ const PipelineView = ({
               <div className="flex mt-4">
                 {allLanes.map((lane, index) => (
                   <PipelineLane
+                    lanes={lanes}
                     allTickets={allTickets}
                     setAllTickets={setAllTickets}
                     subaccountId={subaccountId}

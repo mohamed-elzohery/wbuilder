@@ -11,7 +11,7 @@ import { redirect } from "next/navigation";
 import React from "react";
 import PipelineInfoBar from "../_components/pipeline-infobar";
 import PipelineSettings from "../_components/pipeline-settings";
-import PipelineView from "../_components/pipeline-lane";
+import PipelineView from "../_components/pipeline-view";
 
 type Props = {
   params: { subaccountId: string; pipelineId: string };
