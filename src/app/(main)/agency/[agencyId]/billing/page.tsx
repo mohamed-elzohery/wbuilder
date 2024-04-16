@@ -37,7 +37,7 @@ const page = async ({ params }: Props) => {
   });
 
   const prices = await stripe.prices.list({
-    product: process.env.NEXT_PLURA_PRODUCT_ID,
+    product: process.env.NEXT_WBuilder_PRODUCT_ID,
     active: true,
   });
 
